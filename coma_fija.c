@@ -73,6 +73,8 @@ int funcion_suma (int num1[TAM_VECTOR], int num2[TAM_VECTOR]){
     int i, j;
     int num_final[TAM_VECTOR];
 
+    carry = 0:
+
     for(i = 0; i < TAM_VECTOR-1; i++){          // Recordamos que el 'ultimo "bit" o numero es el reservado para el signo
         num_final[i] = num1[i]+num2[i];
         if(carry == 1){                         // Comprbamos si hay acarreo en la operacion anterior
@@ -84,7 +86,30 @@ int funcion_suma (int num1[TAM_VECTOR], int num2[TAM_VECTOR]){
             carry = 1;                          // Ponemos un 1 en el acarreo
         }
     }   
+    carry = 0;
 
+}
+
+int funcion_resta (int *num1, int *num2, int *resultado){
+    int i, j;
+
+    carry = 0:
+
+    for(i = 0; i < TAM_VECTOR-1; i++){          // Recordamos que el 'ultimo "bit" o numero es el reservado para el signo
+        
+        if(carry == 1){
+            num1[i] = num1[i] - 1;              // Si en la operacion anterior ha habido acarreo entonces restamos uno al primer numero
+            carry = 0;                          // Ponemos a cero el acarreo
+        }
+        num_final[i] = num1[i]-num2[i];         // Realizamos la resta entre ambos numeros
+        if( num_final[i] < 0){                  // Si el numero es menor de 0 entonces lo ponemos a cero
+            num_final[i] == 0;  
+            carry = 1;                          // Y ponemos a 1 el acarreo
+        }
+
+    }
+    
+    carry = 0:
 }
 
 
