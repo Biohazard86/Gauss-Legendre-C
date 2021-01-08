@@ -53,20 +53,23 @@ La cifra mas significativa es la de la derecha del vector, y la menos significat
 
 
 */
+
 // Librerias usadas
 #include <stdlib.h>
 #include <stdio.h>
 
 // CONSTANTES usadas
-#define TAM_VECTOR 1000
-#define NUM_ENTERO 10
-#define NUM_SIGNO 1
-#define NUM_DECIMAL 989
+#define TAM_VECTOR 1000         // Longitud total del array
+#define NUM_ENTERO 10           // Longitud solo de la parte de entero
+#define NUM_SIGNO 1             // Longitud solo del signo, el "mas a la derecha" 
+#define NUM_DECIMAL 989         // Longitud solo de los decimales 
 
 //VARIABLES GLOBALES usadas
-int carry = 0;
+int carry = 0;                  // Variable usada para saber si se produce acarreo en la operaciones
 
-
+// ==============================================================================================================================================
+// INCOMPLETA!!!
+// Funcion que suma dos cadena 
 int funcion_suma (int num1[TAM_VECTOR], int num2[TAM_VECTOR]){
     //Funcion para sumar dos numeros ordenados como se nos indica en el enunciado
     // Tenemos la VARIABLE global carry que nos indica si hay acarreo en la operacion realizada. Siempre se debe poner a 0 al acabar.
@@ -89,11 +92,16 @@ int funcion_suma (int num1[TAM_VECTOR], int num2[TAM_VECTOR]){
     carry = 0;
 
 }
+// ==============================================================================================================================================
 
+
+// ==============================================================================================================================================
+// Funcion para restar dos numeros guardados en cadenas de enteros en forma binaria.
+//Tiene en cuenta el acarreo con la variable local carry, la cual esta a 1 cuando hay acarreo y a 0 cuando no lo hay.
 int funcion_resta (int *num1, int *num2, int *resultado){
     int i, j;
 
-    carry = 0:
+    carry = 0:                                  // SIEMPRE debemos comprabar que el acarreo este a 0, si no la operacion no sera valida
 
     for(i = 0; i < TAM_VECTOR-1; i++){          // Recordamos que el 'ultimo "bit" o numero es el reservado para el signo
         
@@ -111,8 +119,12 @@ int funcion_resta (int *num1, int *num2, int *resultado){
     
     carry = 0:
 }
+// ==============================================================================================================================================
 
 
+// ==============================================================================================================================================
+// Funcion que invierte un array con ayuda de un array auxiliar.
+// Es decir, copia el primer elemento y lo pone en el ultimo del auxiliar. Luego lo que hace es copiar auxiliar al array original (Pasado por ref.)
 int invertir_array(int *cadena1){
     int i, array_auxiliar[TAM_VECTOR];
     //Copiamos de forma inversa 
@@ -125,8 +137,12 @@ int invertir_array(int *cadena1){
     }
 
 }
+// ==============================================================================================================================================
 
 
+
+// ==============================================================================================================================================
+// Funcion principal en la que ejecutamos el programa.
 int main (int argv, char *argc[]){
     
     int num_cinco[TAM_VECTOR];
