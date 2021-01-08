@@ -22,7 +22,10 @@ De los 8 bits hemos fijado y reservado 5 para la parte entera y 3 para la fracci
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+El  programa  utilizar ́a  n ́umeros  en  coma  fija,  representando  los  n ́umeros  como  enteros  enuna base dada (10, 100, 1000, etc.),
+en los que la cifra menos significativa sea la primera, y la ́ultima sea la parte entera.
 
+=======================
 
 Vamos a usar al menos vectores de enteros de al menos 22241 elementos (el ejemplo .txt)
 En realidad vamos a usar 32.728 elementos de tipo int lo que cada numero constara de un tamanio de 32.728 x 2 bytes de 65.536 bytes o 524.288 bites
