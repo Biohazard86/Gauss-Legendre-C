@@ -68,24 +68,24 @@ La cifra mas significativa es la de la derecha del vector, y la menos significat
 int carry = 0;                  // Variable usada para saber si se produce acarreo en la operaciones
 
 // ==============================================================================================================================================
-// INCOMPLETA!!!
 // Funcion que suma dos cadena 
-int funcion_suma (int num1[TAM_VECTOR], int num2[TAM_VECTOR]){
+int funcion_suma (int *num1, int *num2, int *resultado){
     //Funcion para sumar dos numeros ordenados como se nos indica en el enunciado
     // Tenemos la VARIABLE global carry que nos indica si hay acarreo en la operacion realizada. Siempre se debe poner a 0 al acabar.
+    // La operaciones se hacen en el orden "normal", por lo tanto hay que utilizar la funcion invertir array
     int i, j;
-    int num_final[TAM_VECTOR];
+    
 
     carry = 0:
 
-    for(i = 0; i < TAM_VECTOR-1; i++){          // Recordamos que el 'ultimo "bit" o numero es el reservado para el signo
-        num_final[i] = num1[i]+num2[i];
+    for(i = TAM_VECTOR; i > 0; i--){          // Recordamos que el ultimo "bit" o numero es el reservado para el signo
+        resultado[i] = num1[i]+num2[i];
         if(carry == 1){                         // Comprbamos si hay acarreo en la operacion anterior
-            num_final[i] = num_final[i] + 1;    // Si hay acarreo le sumamos uno al resultado
+            resultado[i] = resultado[i] + 1;    // Si hay acarreo le sumamos uno al resultado
             carry = 0;                          // Ponemos a 0 el acarreo
         }
-        if(num_final[i] > 1){                   // Si el numero que hemos obtenido es mayor a 1, ponemos un 1 y aumentamos el acarreo
-            num_final[i] = 1;                      // Ponemos un 1
+        if(resultado[i] > 1){                   // Si el numero que hemos obtenido es mayor a 1, ponemos un 1 y aumentamos el acarreo
+            resultado[i] = 1;                      // Ponemos un 1
             carry = 1;                          // Ponemos un 1 en el acarreo
         }
     }   
@@ -98,20 +98,21 @@ int funcion_suma (int num1[TAM_VECTOR], int num2[TAM_VECTOR]){
 // ==============================================================================================================================================
 // Funcion para restar dos numeros guardados en cadenas de enteros en forma binaria.
 //Tiene en cuenta el acarreo con la variable local carry, la cual esta a 1 cuando hay acarreo y a 0 cuando no lo hay.
+// La operaciones se hacen en el orden "normal", por lo tanto hay que utilizar la funcion invertir array
 int funcion_resta (int *num1, int *num2, int *resultado){
     int i, j;
 
     carry = 0:                                  // SIEMPRE debemos comprabar que el acarreo este a 0, si no la operacion no sera valida
 
-    for(i = 0; i < TAM_VECTOR-1; i++){          // Recordamos que el 'ultimo "bit" o numero es el reservado para el signo
+    for(i = TAM_VECTOR; i > 0; i--){          // Recordamos que el 'ultimo "bit" o numero es el reservado para el signo
         
         if(carry == 1){
             num1[i] = num1[i] - 1;              // Si en la operacion anterior ha habido acarreo entonces restamos uno al primer numero
             carry = 0;                          // Ponemos a cero el acarreo
         }
-        num_final[i] = num1[i]-num2[i];         // Realizamos la resta entre ambos numeros
-        if( num_final[i] < 0){                  // Si el numero es menor de 0 entonces lo ponemos a cero
-            num_final[i] == 0;  
+        resultado[i] = num1[i]-num2[i];         // Realizamos la resta entre ambos numeros
+        if( resultado[i] < 0){                  // Si el numero es menor de 0 entonces lo ponemos a cero
+            resultado[i] == 0;  
             carry = 1;                          // Y ponemos a 1 el acarreo
         }
 
@@ -139,6 +140,51 @@ int invertir_array(int *cadena1){
 }
 // ==============================================================================================================================================
 
+
+// ==============================================================================================================================================
+// Funcion para convertir numeros de decimal a binario, para poder tratarlos con nuestro programa
+int convertir_decimal_a_binario(int numero, int *cadena1){
+    // El numero que recibimos por parametro se trata del numero que vamos a tratar 
+    // La cadena es un puntero al string de TAM_VECTOR elementos en el cual vamos a almacenar el numero
+
+    int i;
+    int numero_numeros;
+    numero_numeros = cuenta_cifras(numero);
+    int cadena_numero[numero_numeros];
+    
+
+    // Lo primero es poner a 0 todo la cadena en la cual vamos a escribir, para asegurarnos de que todos los "bits" estan a cero
+    for( i = 0; i < TAM_VECTOR; i++){
+        cadena1[i] = 0;
+    }
+
+    // Pasamos el numero a una cadena 
+
+
+}
+
+// ==============================================================================================================================================
+
+
+// ==============================================================================================================================================
+// Funcion para calcular el numero de cifras de un numero
+int cuenta_cifras(int num){
+    int i=10, t=0;
+    
+    do{
+        t++;                    //El numero de cifras
+        if((num / i) == 0){     // Si la division entre el numero y un multiplo de 10 es 0 entonces es que hemos llegado al maximo de cifras
+            return t;           // Retornamos el numero de cifras
+            
+        }else{                  // Si no
+            i=i*10;             // Seguimos incrementando en un multiplo de 10 el numero i
+        }
+    }
+    while(1)                    // Bucle infinito
+
+}
+
+// ==============================================================================================================================================
 
 
 // ==============================================================================================================================================
