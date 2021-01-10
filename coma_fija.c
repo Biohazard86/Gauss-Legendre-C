@@ -76,7 +76,7 @@ int funcion_suma (int *num1, int *num2, int *resultado){
     int i, j;
     
 
-    carry = 0:
+    carry = 0;
 
     for(i = TAM_VECTOR; i > 0; i--){          // Recordamos que el ultimo "bit" o numero es el reservado para el signo
         resultado[i] = num1[i]+num2[i];
@@ -102,7 +102,7 @@ int funcion_suma (int *num1, int *num2, int *resultado){
 int funcion_resta (int *num1, int *num2, int *resultado){
     int i, j;
 
-    carry = 0:                                  // SIEMPRE debemos comprabar que el acarreo este a 0, si no la operacion no sera valida
+    carry = 0;                                  // SIEMPRE debemos comprabar que el acarreo este a 0, si no la operacion no sera valida
 
     for(i = TAM_VECTOR; i > 0; i--){          // Recordamos que el 'ultimo "bit" o numero es el reservado para el signo
         
@@ -118,7 +118,7 @@ int funcion_resta (int *num1, int *num2, int *resultado){
 
     }
     
-    carry = 0:
+    carry = 0;
 }
 // ==============================================================================================================================================
 
@@ -147,10 +147,12 @@ int convertir_decimal_a_binario(int numero, int *cadena1){
     // El numero que recibimos por parametro se trata del numero que vamos a tratar 
     // La cadena es un puntero al string de TAM_VECTOR elementos en el cual vamos a almacenar el numero
 
-    int i;
+    int i,t,q=0;
     int numero_numeros;
     numero_numeros = cuenta_cifras(numero);
     int cadena_numero[numero_numeros];
+    int resto, divisor;
+    int cadena_aux[TAM_VECTOR];
     
 
     // Lo primero es poner a 0 todo la cadena en la cual vamos a escribir, para asegurarnos de que todos los "bits" estan a cero
@@ -158,8 +160,41 @@ int convertir_decimal_a_binario(int numero, int *cadena1){
         cadena1[i] = 0;
     }
 
-    // Pasamos el numero a una cadena 
+    divisor = numero;                           // Guardamos el numero como divisor
+    i = 0;                                      // Usaremos el indice i como posicion para guardar el resto
+    do{                                         // hacemos un bucle con do-while
+        divisor = divisor / 2;                  // dividimos divisor entre dos y lo guardamos en divisor para la siguiente iteraccion
+        resto = divisor % 2;                    // Calculamos el resto para guardarlo como parte del numero
+        if((resto == 1) || (resto == 0)){       // If que nos sirve de control para ver que no pase nada raro 
+            cadena1[i] = resto;                 // Si todo va bien guardamos el numero en la cadena
+        }else{
+            printf("\nERROR\n");                // Si hay algun problema imprimimos el error
+            
+        }
+        i++;                                    // Incrementamos el contador del indice
 
+    }while(resto >= 1);
+
+    // Como el numero puede no ser del mismo tamanio maximo, tenemos que completarlo.
+
+    for(t=i;t==0;t--){                          // Si al pasar de decima a binario hemos tenido X iteracciones, entonces vamos a la posicion X del vector para empezar ahi hasta la posicion 0
+        cadena_aux[q] = cadena1[t];              // q empieza en la 0, porque al pasar de decimal a binario se va calculando "del reves"
+
+        q++;                                    // Incrementamos q para avanzar en el vector
+        if(t==0){                               // Cuando llegamos a la primera posicion del vector, el resto de posiciones, desde q hasta TAM_VECTOR son 0
+            for(i=q;i<TAM_VECTOR;i++){          // FOR para poner a 0 el resto del vector
+                cadena_aux[i] = 0;
+            }
+        }
+    }
+
+    // Ahora vamos a copiar la cadena aux en la cadena que nos han pasado
+    printf("\n");
+    for(i=0; i<TAM_VECTOR; i++){                // For para copiar un vector a otro
+        cadena1[i] = cadena_aux[i];
+        printf(" %d", cadena1[i]);            // Lo vamos mostrando por pantalla a la vez
+    }
+    printf("\n");
 
 }
 
@@ -180,7 +215,7 @@ int cuenta_cifras(int num){
             i=i*10;             // Seguimos incrementando en un multiplo de 10 el numero i
         }
     }
-    while(1)                    // Bucle infinito
+    while(1);                    // Bucle infinito
 
 }
 
@@ -191,37 +226,39 @@ int cuenta_cifras(int num){
 // Funcion principal en la que ejecutamos el programa.
 int main (int argv, char *argc[]){
     
-    int num_cinco[TAM_VECTOR];
+    int num_cinco[TAM_VECTOR], num_parametro[TAM_VECTOR];
     int num_dos[2] = {1,2};
     int i,j;
 
     int num1[TAM_VECTOR];
 
+
+    convertir_decimal_a_binario(argc[1], num_cinco);
     //Guardamos el numero cinco en el vector
-    for(i = 0; i<TAM_VECTOR;i++){
+    //for(i = 0; i<TAM_VECTOR;i++){
        
-        if((i == 0) || (i == 1) || (i == 3)){
-            num_cinco[i] = 1; 
-        }
-        else{
-            num_cinco[i] = 0;
-        }
-    }
-
+    //    if((i == 0) || (i == 1) || (i == 3)){
+    //        num_cinco[i] = 1; 
+    //    }
+    //    else{
+    //        num_cinco[i] = 0;
+    //    }
+    //}
+    
     //Lo mostramos por pantalla
-    printf("\nNumero 5 >>");
-    printf("\nEl tam es de: %ld\n", sizeof(num_cinco));
-    for(i = 0; i < TAM_VECTOR-1; i++){
-        printf("%d  ", num_cinco[i]);
-    }
+    //printf("\nNumero 5 >>");
+    //printf("\nEl tam es de: %ld\n", sizeof(num_cinco));
+    //for(i = 0; i < TAM_VECTOR-1; i++){
+    //    printf("%d  ", num_cinco[i]);
+    //}
 
 
 
-    invertir_array(num_cinco);
-    printf("\nEl tam es de: %ld\n", sizeof(num_cinco));
-    for(i = 0; i < TAM_VECTOR; i++){
-        printf("%d  ", num_cinco[i]);
-    }
+    //invertir_array(num_cinco);
+    //printf("\nEl tam es de: %ld\n", sizeof(num_cinco));
+    //for(i = 0; i < TAM_VECTOR; i++){
+    //    printf("%d  ", num_cinco[i]);
+    //}
 
     
 }
