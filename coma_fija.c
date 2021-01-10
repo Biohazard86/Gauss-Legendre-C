@@ -59,10 +59,10 @@ La cifra mas significativa es la de la derecha del vector, y la menos significat
 #include <stdio.h>
 
 // CONSTANTES usadas
-#define TAM_VECTOR 1000         // Longitud total del array
+#define TAM_VECTOR 100         // Longitud total del array
 #define NUM_ENTERO 10           // Longitud solo de la parte de entero
 #define NUM_SIGNO 1             // Longitud solo del signo, el "mas a la derecha" 
-#define NUM_DECIMAL 989         // Longitud solo de los decimales 
+#define NUM_DECIMAL 89        // Longitud solo de los decimales 
 
 //VARIABLES GLOBALES usadas
 int carry = 0;                  // Variable usada para saber si se produce acarreo en la operaciones
@@ -154,32 +154,41 @@ int convertir_decimal_a_binario(int numero, int *cadena1){
     int resto, divisor;
     int cadena_aux[TAM_VECTOR];
     
-
+    printf("\nEl numero a convertir es %d\n", numero);
     // Lo primero es poner a 0 todo la cadena en la cual vamos a escribir, para asegurarnos de que todos los "bits" estan a cero
     for( i = 0; i < TAM_VECTOR; i++){
         cadena1[i] = 0;
     }
-
+    
     divisor = numero;                           // Guardamos el numero como divisor
     i = 0;                                      // Usaremos el indice i como posicion para guardar el resto
     do{                                         // hacemos un bucle con do-while
-        divisor = divisor / 2;                  // dividimos divisor entre dos y lo guardamos en divisor para la siguiente iteraccion
         resto = divisor % 2;                    // Calculamos el resto para guardarlo como parte del numero
+        divisor = divisor / 2;                  // dividimos divisor entre dos y lo guardamos en divisor para la siguiente iteraccion
+        //printf("\n divisor: %d", divisor);
+        //printf("\n resto: %d", resto);
         if((resto == 1) || (resto == 0)){       // If que nos sirve de control para ver que no pase nada raro 
             cadena1[i] = resto;                 // Si todo va bien guardamos el numero en la cadena
+            //printf("\n %d ", cadena1[i]);
         }else{
             printf("\nERROR\n");                // Si hay algun problema imprimimos el error
             
         }
         i++;                                    // Incrementamos el contador del indice
+        
+        //printf("\n--------------\n");
 
-    }while(resto >= 1);
+    }while((divisor > 0));
+    // cadena1[i] = resto;                         // Debemos meter el ultimo resto en la cadena.
 
     // Como el numero puede no ser del mismo tamanio maximo, tenemos que completarlo.
-
-    for(t=i;t==0;t--){                          // Si al pasar de decima a binario hemos tenido X iteracciones, entonces vamos a la posicion X del vector para empezar ahi hasta la posicion 0
+    printf("\n");
+    printf("AAA");
+    
+    for(t=i;t>=0;t--){                          // Si al pasar de decima a binario hemos tenido X iteracciones, entonces vamos a la posicion X del vector para empezar ahi hasta la posicion 0
+        printf("\nEl valor de t es >> %d\n", t);
         cadena_aux[q] = cadena1[t];              // q empieza en la 0, porque al pasar de decimal a binario se va calculando "del reves"
-
+        printf(" %d", cadena1[t]);
         q++;                                    // Incrementamos q para avanzar en el vector
         if(t==0){                               // Cuando llegamos a la primera posicion del vector, el resto de posiciones, desde q hasta TAM_VECTOR son 0
             for(i=q;i<TAM_VECTOR;i++){          // FOR para poner a 0 el resto del vector
@@ -187,6 +196,12 @@ int convertir_decimal_a_binario(int numero, int *cadena1){
             }
         }
     }
+    //int k;
+    printf("\n");
+    printf("\n");
+    //for(k=0; k<TAM_VECTOR; k++){
+    //    printf(" %d", cadena_aux[k]);
+    //}
 
     // Ahora vamos a copiar la cadena aux en la cadena que nos han pasado
     printf("\n");
@@ -229,11 +244,12 @@ int main (int argv, char *argc[]){
     int num_cinco[TAM_VECTOR], num_parametro[TAM_VECTOR];
     int num_dos[2] = {1,2};
     int i,j;
-
+    int numero_param;
     int num1[TAM_VECTOR];
 
+    numero_param = atoi(argc[1]);
 
-    convertir_decimal_a_binario(argc[1], num_cinco);
+    convertir_decimal_a_binario(numero_param, num_cinco);
     //Guardamos el numero cinco en el vector
     //for(i = 0; i<TAM_VECTOR;i++){
        
