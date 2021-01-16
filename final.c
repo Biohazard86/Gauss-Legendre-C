@@ -87,6 +87,43 @@ int funcion_resta_bien (int cadena1_buena[], int cadena2_buena[], int resultado[
 
 
 // ==============================================================================================================================================
+// Funcion para multiplicar como las personas normales en vez de al reves
+
+void funcion_multiplica_bien(int cadena1_buena[], int cadena2_buena[], int resultado[]){
+    int i, j;
+    int cadena1[TAM_VECTOR], cadena2[TAM_VECTOR];
+    int matriz_intermedia[TAM_VECTOR][TAM_VECTOR];
+
+
+    // Copiamos los vectores en unos auxiliares para no modificarlos
+    for(i=0; i< TAM_VECTOR; i++){
+        cadena1[i] = cadena1_buena[i];
+        cadena2[i] = cadena2_buena[i];
+    }
+
+    // Vamos a multplicar como lo hariamos de forma normal, y guardarlo en una matriz cuadrada de TAM_VECTOR X TAM_VECTOR
+    for(i = 0; i < TAM_VECTOR ; i++){
+
+        for(j = 0; j < TAM_VECTOR; j++){
+            resultado[i][j] = cadena1[i] * cadena2[j];
+        }
+    }    
+    // Tenemos que sumar los numeros de la siguiente forma>>> 
+    /*
+            1 1 1 1
+          1 1 1 1  
+        1 1 1 1
+      ---------------    
+        1 2 3 3 2 1
+    */
+
+}
+
+
+// ==============================================================================================================================================
+
+
+// ==============================================================================================================================================
 // Funcion que invierte un array con ayuda de un array auxiliar.
 // Es decir, copia el primer elemento y lo pone en el ultimo del auxiliar. Luego lo que hace es copiar auxiliar al array original (Pasado por ref.)
 int invertir_array(int *cadena1){
