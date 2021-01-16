@@ -87,41 +87,38 @@ int funcion_resta_bien (int cadena1_buena[], int cadena2_buena[], int resultado[
 
 
 // ==============================================================================================================================================
-// Funcion para multiplicar como las personas normales en vez de al reves
+// Funcion para 
 
-void funcion_multiplica_bien(int cadena1_buena[], int cadena2_buena[], int resultado[]){
-    int i, j;
-    int cadena1[TAM_VECTOR], cadena2[TAM_VECTOR];
-    int matriz_intermedia[TAM_VECTOR][TAM_VECTOR];
+void karatsuba(int cadena1_buena[], int cadena2_buena[], int resultado[]){
 
-
-    // Copiamos los vectores en unos auxiliares para no modificarlos
-    for(i=0; i< TAM_VECTOR; i++){
-        cadena1[i] = cadena1_buena[i];
-        cadena2[i] = cadena2_buena[i];
-    }
-
-    // Vamos a multplicar como lo hariamos de forma normal, y guardarlo en una matriz cuadrada de TAM_VECTOR X TAM_VECTOR
-    for(i = 0; i < TAM_VECTOR ; i++){
-
-        for(j = 0; j < TAM_VECTOR; j++){
-            resultado[i][j] = cadena1[i] * cadena2[j];
-        }
-    }    
-    // Tenemos que sumar los numeros de la siguiente forma>>> 
-    /*
-            1 1 1 1
-          1 1 1 1  
-        1 1 1 1
-      ---------------    
-        1 2 3 3 2 1
-    */
 
 }
 
 
 // ==============================================================================================================================================
 
+
+// ==============================================================================================================================================
+// Funcion para dividir
+
+void karatsuba_dividir(int cadena1_buena[], int numero_dividir, int resultado[]){
+
+
+}
+
+
+// ==============================================================================================================================================
+
+// ==============================================================================================================================================
+// Funcion para raiz cuadrada
+
+void sqrt_arrays(int array[], int resultado[]){
+
+
+}
+
+
+// ==============================================================================================================================================
 
 // ==============================================================================================================================================
 // Funcion que invierte un array con ayuda de un array auxiliar.
@@ -152,24 +149,53 @@ int limpieza_vector(int vector[]){
 
 // ==============================================================================================================================================
 
+// ==============================================================================================================================================
+// Copia el array 1 en el array 2
+int copia_array(int array1[], int array2){
+    int i;
+    for(i=0; i<TAM_VECTOR; i++){   // Recorremos el vector que nos pase por parametro
+        array2[i] = array2[i];
+    }
+}
 
+// ==============================================================================================================================================
 
 // ==============================================================================================================================================
 // Funcion de Gauss Legendre a la cual le pasamos el numero de decimales, y todos los posibles vectores usados
 // ; 
 
-int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], int pi[]){
-    int temporal;
+int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], int pi[], int numero_decimales){
+    int temporal, array_auxiliar1[TAM_VECTOR], array_auxiliar2[TAM_VECTOR], array_auxiliar3[TAM_VECTOR], array_auxiliar4[TAM_VECTOR];   // Variables auxiliares.
     long double pi_normal; // Lo usaremos para almacenar PI en el caso de alcanzar la precisiond eseada.
 
     printf("\n Se procede a un iteraccion de Gauss-Legendre\n");
 
-    // La variables numero_de_numeros almacena la precision que deseamos obtener
+
+    // La variables numero_decimales almacena la precision que deseamos obtener (Numero de decimales requerido)
     
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // Vamos a repetir las siguientes instrucciones hasta que queramos la precision deseada
     // La cual es el numero que le pasamos por parametro a esta funcion 
-    // (Numer de decimales)
+    // (Numerp de decimales)
+    // La primera iteraccion la vamos a realizar si o si.
+
+
+// Pasos de GAUSS LEGENDRE
+    // xn = ( (an + bn) / 2 );
+    funcion_suma_bien(an,bn, array_auxiliar1);                  // // Sumamos an y bn y lo guardamos en el array auxiliar1
+    karatsuba_dividir(array_auxiliar1, 2, array_auxiliar2);     // Dividimos el resultado anterior entre 2 y lo guardamos en el array auxiliar2
+    copia_array(array_auxiliar2, xn);                           // Copiamos el valor del array auxiliar2 en el array xn.
+    // Podiamos haber pasado a la funcion karatsuba_dividir el valor de xn como "resultado". Seria igual de correcto
+
+    // yn = sqrt(an*bn);
+    limpieza_vector(array_auxiliar1);                   // Limpiamos el array auxiliar que vamos a usar ahora.
+    karatsuba(an, bn, array_auxiliar1);                 // Multiplicamos an por bn y lo guardamos en array auxiliar 1
+    sqrt_arrays(array_auxiliar1, array_auxiliar2);      // calculamos la raiz cuadrada del calculo anterior y la guardamos en array auxiliar2
+    copia_array(array_auxiliar2, yn);
+
+    //tn = tn - pn*(pow((an-xn),2));
+
+
 
 
 
@@ -397,7 +423,7 @@ int main (int argv, char *argc[]){
     
 
      // Llamamos a la funcionde GAUSS LEGENDRE 
-    gauss_legendre(an, bn, tn, pn, xn, yn, pi);
+    gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales);
 
 
 
