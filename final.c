@@ -120,10 +120,10 @@ int limpieza_vector(int vector[]){
 // ==============================================================================================================================================
 // Funcion de Gauss Legendre a la cual le pasamos el numero de decimales, y todos los posibles vectores usados
 // ; 
-/*
+
 int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], int pi[]){
     int temporal;
-    long double pi; // Lo usaremos para almacenar PI en el caso de alcanzar la precisiond eseada.
+    long double pi_normal; // Lo usaremos para almacenar PI en el caso de alcanzar la precisiond eseada.
 
     printf("\n Se procede a un iteraccion de Gauss-Legendre\n");
 
@@ -134,6 +134,9 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
     // La cual es el numero que le pasamos por parametro a esta funcion 
     // (Numer de decimales)
 
+
+
+    /*
     xn = ( (an + bn) / 2 );
     yn = sqrt(an*bn);
     // Para elevar al cuadrado usamos pow(numero,potencia)
@@ -170,11 +173,11 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
            
     }
     
-
+    */
 
 }
 
-*/
+
 // ==============================================================================================================================================
 
 
@@ -322,7 +325,7 @@ int main (int argv, char *argc[]){
 
     // En el caso de que no haya error, pasamos el primer parametro a int y lo guardamos en la variable de numero de iteracciones.
     numero_decimales = atoi(argc[1]);;
-    printf("\nSe van a calcular la iteracciones para %d decimales de PI\n\n", numero_decimales);
+    printf("\n Se van a calcular la iteracciones para %d decimales de PI\n\n", numero_decimales);
 
     // limpiamos los vectores, ya que puede haber datos resuduales dentro de ellos, nos aseguramos de que solom haya 0s
     // Pasamos estos vectores por referencia para que puedan ser modificados.
@@ -357,11 +360,7 @@ int main (int argv, char *argc[]){
     
 
      // Llamamos a la funcionde GAUSS LEGENDRE 
-
-    invertir_array(an);
-    invertir_array(tn);
-    funcion_resta_bien(an, tn, vector_auxiliar);
-    mostrar_vector_bien(vector_auxiliar);
+    gauss_legendre(an, bn, tn, pn, xn, yn, pi);
 
 
 
