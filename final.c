@@ -153,11 +153,11 @@ void karatsuba_dividir(int cadena1_buena[], int numero_dividir, int resultado[])
     // Copiamos los vectores en unos auxiliares para no modificarlos
     for(i=0; i< TAM_VECTOR; i++){
         cadena1[i] = cadena1_buena[i];
-        cadena2[i] = cadena2_buena[i];
+        
     }
 
     invertir_array(cadena1);        // Colocamos los arrays en el orden normal para realizar las operaciones
-    invertir_array(cadena2);
+   
 
 
 
@@ -173,7 +173,7 @@ void karatsuba_dividir(int cadena1_buena[], int numero_dividir, int resultado[])
 // ==============================================================================================================================================
 // Funcion para dividir
 
-void karatsuba_dividir_array(int cadena1_buena[], int numero_dividir[], int resultado[]){
+void karatsuba_dividir_array(int cadena1_buena[], int cadena2_buena[], int resultado[]){
     int i, j;
     int cadena1[TAM_VECTOR], cadena2[TAM_VECTOR];
 
@@ -205,11 +205,12 @@ void sqrt_arrays(int array[], int resultado[]){
     int cadena1[TAM_VECTOR], cadena2[TAM_VECTOR];
 
     // Copiamos los vectores en unos auxiliares para no modificarlos
+    /*
     for(i=0; i< TAM_VECTOR; i++){
         cadena1[i] = cadena1_buena[i];
         cadena2[i] = cadena2_buena[i];
     }
-
+    */
     invertir_array(cadena1);        // Colocamos los arrays en el orden normal para realizar las operaciones
     invertir_array(cadena2);
 
