@@ -15,19 +15,44 @@
 int carry = 0;                  // Variable usada para saber si se produce acarreo en la operacione
 
 // ==============================================================================================================================================           FUNCIONA BIEN
+// Funcion que invierte un array con ayuda de un array auxiliar.
+// Es decir, copia el primer elemento y lo pone en el ultimo del auxiliar. Luego lo que hace es copiar auxiliar al array original (Pasado por ref.)
+int invertir_array(int *cadena1){
+    int i, array_auxiliar[TAM_VECTOR];
+    //Copiamos de forma inversa 
+    for(i=0; i<TAM_VECTOR; i++){
+        array_auxiliar[TAM_VECTOR-1-i] = cadena1[i];
+    }
+    // Cuando acabemos copiamos el array invertido en cadena de nuevo
+    for(i=0; i<TAM_VECTOR; i++){
+        cadena1[i] = array_auxiliar[i];
+    }
+
+}
+// ==============================================================================================================================================
+
+
+// ==============================================================================================================================================           FUNCIONA BIEN
 // Funcion que suma dos cadena 
 int funcion_suma_bien (int cadena1_buena[], int cadena2_buena[], int resultado[]){
+
     //Funcion para sumar dos numeros ordenados como se nos indica en el enunciado
     // Tenemos la VARIABLE global carry que nos indica si hay acarreo en la operacion realizada. Siempre se debe poner a 0 al acabar.
     // La operaciones se hacen en el orden "normal", por lo tanto hay que utilizar la funcion invertir array
     int i, j;
     int cadena1[TAM_VECTOR], cadena2[TAM_VECTOR];
 
+    
+
+
     // Copiamos los vectores en unos auxiliares para no modificarlos
     for(i=0; i< TAM_VECTOR; i++){
         cadena1[i] = cadena1_buena[i];
         cadena2[i] = cadena2_buena[i];
     }
+
+    invertir_array(cadena1);        // Colocamos los arrays en el orden normal para realizar las operaciones
+    invertir_array(cadena2);;
 
     carry = 0;
 
@@ -42,6 +67,8 @@ int funcion_suma_bien (int cadena1_buena[], int cadena2_buena[], int resultado[]
             carry = 1;                          // Ponemos un 1 en el acarreo
         }
     }   
+
+    invertir_array(resultado);
     carry = 0;
 
 }
@@ -63,6 +90,9 @@ int funcion_resta_bien (int cadena1_buena[], int cadena2_buena[], int resultado[
         cadena2[i] = cadena2_buena[i];
     }
 
+    invertir_array(cadena1);        // Colocamos los arrays en el orden normal para realizar las operaciones
+    invertir_array(cadena2);
+
     carry = 0;                                  // SIEMPRE debemos comprabar que el acarreo este a 0, si no la operacion no sera valida
 
     for(i = TAM_VECTOR; i > 0; i--){          // Recordamos que el 'ultimo "bit" o numero es el reservado para el signo
@@ -80,18 +110,33 @@ int funcion_resta_bien (int cadena1_buena[], int cadena2_buena[], int resultado[
         
 
     }
-    
+    invertir_array(resultado);
     carry = 0;
 }
 // ==============================================================================================================================================
 
 
 // ==============================================================================================================================================
-// Funcion para 
+// Funcion para realizar multiplicaciones de numeros grandes.
 
 void karatsuba(int cadena1_buena[], int cadena2_buena[], int resultado[]){
+    int i, j;
+    int cadena1[TAM_VECTOR], cadena2[TAM_VECTOR];
+
+    // Copiamos los vectores en unos auxiliares para no modificarlos
+    for(i=0; i< TAM_VECTOR; i++){
+        cadena1[i] = cadena1_buena[i];
+        cadena2[i] = cadena2_buena[i];
+    }
+
+    invertir_array(cadena1);        // Colocamos los arrays en el orden normal para realizar las operaciones
+    invertir_array(cadena2);
 
 
+
+
+
+    invertir_array(resultado);
 }
 
 
@@ -102,7 +147,50 @@ void karatsuba(int cadena1_buena[], int cadena2_buena[], int resultado[]){
 // Funcion para dividir
 
 void karatsuba_dividir(int cadena1_buena[], int numero_dividir, int resultado[]){
+    int i, j;
+    int cadena1[TAM_VECTOR], cadena2[TAM_VECTOR];
 
+    // Copiamos los vectores en unos auxiliares para no modificarlos
+    for(i=0; i< TAM_VECTOR; i++){
+        cadena1[i] = cadena1_buena[i];
+        cadena2[i] = cadena2_buena[i];
+    }
+
+    invertir_array(cadena1);        // Colocamos los arrays en el orden normal para realizar las operaciones
+    invertir_array(cadena2);
+
+
+
+
+
+    invertir_array(resultado);
+
+}
+
+
+// ==============================================================================================================================================
+
+// ==============================================================================================================================================
+// Funcion para dividir
+
+void karatsuba_dividir_array(int cadena1_buena[], int numero_dividir[], int resultado[]){
+    int i, j;
+    int cadena1[TAM_VECTOR], cadena2[TAM_VECTOR];
+
+    // Copiamos los vectores en unos auxiliares para no modificarlos
+    for(i=0; i< TAM_VECTOR; i++){
+        cadena1[i] = cadena1_buena[i];
+        cadena2[i] = cadena2_buena[i];
+    }
+
+    invertir_array(cadena1);        // Colocamos los arrays en el orden normal para realizar las operaciones
+    invertir_array(cadena2);
+
+
+
+
+
+    invertir_array(resultado);
 
 }
 
@@ -113,30 +201,28 @@ void karatsuba_dividir(int cadena1_buena[], int numero_dividir, int resultado[])
 // Funcion para raiz cuadrada
 
 void sqrt_arrays(int array[], int resultado[]){
+    int i, j;
+    int cadena1[TAM_VECTOR], cadena2[TAM_VECTOR];
 
+    // Copiamos los vectores en unos auxiliares para no modificarlos
+    for(i=0; i< TAM_VECTOR; i++){
+        cadena1[i] = cadena1_buena[i];
+        cadena2[i] = cadena2_buena[i];
+    }
+
+    invertir_array(cadena1);        // Colocamos los arrays en el orden normal para realizar las operaciones
+    invertir_array(cadena2);
+
+
+
+
+
+    invertir_array(resultado);
 
 }
 
 
 // ==============================================================================================================================================
-
-// ==============================================================================================================================================
-// Funcion que invierte un array con ayuda de un array auxiliar.
-// Es decir, copia el primer elemento y lo pone en el ultimo del auxiliar. Luego lo que hace es copiar auxiliar al array original (Pasado por ref.)
-int invertir_array(int *cadena1){
-    int i, array_auxiliar[TAM_VECTOR];
-    //Copiamos de forma inversa 
-    for(i=0; i<TAM_VECTOR; i++){
-        array_auxiliar[TAM_VECTOR-1-i] = cadena1[i];
-    }
-    // Cuando acabemos copiamos el array invertido en cadena de nuevo
-    for(i=0; i<TAM_VECTOR; i++){
-        cadena1[i] = array_auxiliar[i];
-    }
-
-}
-// ==============================================================================================================================================
-
 
 // ==============================================================================================================================================
 // Limpiamos los vectores, introduciendo todo 0s 
@@ -151,20 +237,66 @@ int limpieza_vector(int vector[]){
 
 // ==============================================================================================================================================
 // Copia el array 1 en el array 2
-int copia_array(int array1[], int array2){
+int copia_array(int array1[], int array2[]){
+    // No es necesario invertir aqui.
     int i;
     for(i=0; i<TAM_VECTOR; i++){   // Recorremos el vector que nos pase por parametro
         array2[i] = array2[i];
     }
 }
+// ==============================================================================================================================================
+
 
 // ==============================================================================================================================================
+int numero_a_cadena(double numero, int cadena[]){
+    if(numero < 0){ // Si es menor a cero entonces sabemos que el primer numero va a ser un 0
+        cadena[0]=0;
+
+    }
+}
+
+// ==============================================================================================================================================
+
+
+// ==============================================================================================================================================
+void mostrar_vector_bien(int vector[]){
+    invertir_array(vector);        // Colocamos los arrays en el orden normal para realizar las operaciones
+    
+    int i;
+    printf("\n");
+    for(i=0; i< TAM_VECTOR; i++){
+        if(i == 1){
+            printf(".");
+        }
+        printf("%d", vector[i]);
+    }
+    printf("\n");
+}
+// ==============================================================================================================================================
+
+
+// ==============================================================================================================================================
+void mostrar_vector_inverso(int vector[]){
+    int i;
+    invertir_array(vector);        // Colocamos los arrays en el orden normal para realizar las operaciones
+    
+    printf("\n");
+    for(i=0; i< TAM_VECTOR; i++){
+        if(i == (TAM_VECTOR - 1)){
+            printf(".");
+        }
+        printf("%d", vector[i]);
+    }
+    printf("\n");
+}
+// ==============================================================================================================================================
+
 
 // ==============================================================================================================================================
 // Funcion de Gauss Legendre a la cual le pasamos el numero de decimales, y todos los posibles vectores usados
 // ; 
 
-int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], int pi[], int numero_decimales){
+int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], int pi[], int numero_decimales, int dos[], int cuatro[]){
     int temporal, array_auxiliar1[TAM_VECTOR], array_auxiliar2[TAM_VECTOR], array_auxiliar3[TAM_VECTOR], array_auxiliar4[TAM_VECTOR];   // Variables auxiliares.
     long double pi_normal; // Lo usaremos para almacenar PI en el caso de alcanzar la precisiond eseada.
 
@@ -189,11 +321,63 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
 
     // yn = sqrt(an*bn);
     limpieza_vector(array_auxiliar1);                   // Limpiamos el array auxiliar que vamos a usar ahora.
+    limpieza_vector(array_auxiliar2);                   // Limpiamos el array auxiliar que vamos a usar ahora.
     karatsuba(an, bn, array_auxiliar1);                 // Multiplicamos an por bn y lo guardamos en array auxiliar 1
     sqrt_arrays(array_auxiliar1, array_auxiliar2);      // calculamos la raiz cuadrada del calculo anterior y la guardamos en array auxiliar2
     copia_array(array_auxiliar2, yn);
 
     //tn = tn - pn*(pow((an-xn),2));
+    limpieza_vector(array_auxiliar1);                   // Limpiamos el array auxiliar que vamos a usar ahora.
+    limpieza_vector(array_auxiliar2);                   // Limpiamos el array auxiliar que vamos a usar ahora.
+    funcion_resta_bien(an, xn, array_auxiliar1);        // Realizamos la resta y la guardamos en array auxiliar 1
+    karatsuba(array_auxiliar1, array_auxiliar1, array_auxiliar2); // Para elevar al cuadrado, multiplicamos el numero por el mismo, y lo guaramos el array auxiliar 2
+    karatsuba(pn, array_auxiliar2, array_auxiliar3);    // Multiplicamos pn * auxiliar 2 y lo guardamos en auxiliar 3
+    funcion_resta_bien(tn, array_auxiliar3, array_auxiliar4);   // Restamos a tn, el array auxiliar 3 y lo guardamos en auxiliar 4
+    copia_array(array_auxiliar4, tn);
+
+    // an = xn;
+    limpieza_vector(array_auxiliar1);                   // Limpiamos el array auxiliar que vamos a usar ahora.
+    limpieza_vector(array_auxiliar2);                   // Limpiamos el array auxiliar que vamos a usar ahora.
+    limpieza_vector(array_auxiliar1);                   // Limpiamos el array auxiliar que vamos a usar ahora.
+    limpieza_vector(array_auxiliar2);                   // Limpiamos el array auxiliar que vamos a usar ahora.
+    copia_array(xn, an);        // Copiamos el array xn en el array an
+
+    //bn = yn;
+    copia_array(yn, bn);        // Copiamos el array yn en el array bn
+
+    //pn = 2*pn;
+    karatsuba(pn, dos, array_auxiliar1);
+    copia_array(array_auxiliar1, pn);
+    limpieza_vector(array_auxiliar1);                   // Limpiamos el array auxiliar que vamos a usar ahora.
+
+    // Ya tenemos todos los calculos realizados, ahora tenemos que comprobar si se ha alcanzado la precision deseada o si por el contrario, necesitamos una nueva iteraccion del algoritmo. 
+    // Para ello (an-bn) tiene que ser mayor o igual al numero de decimales requeridos
+    // Primero realizamos la resta fuera del if, para una mayor claridad del codigo
+    funcion_resta_bien(an,bn, array_auxiliar1);
+    if(array_auxiliar1[0] >= numero_decimales){     // Si la parte entera del array de la resta (an-bn) es mayor o igual al numero de decimales de precision requerido
+        // Entonces hemos acabado, procedemos a calcular pi
+        limpieza_vector(array_auxiliar1);
+        //an+bn
+        funcion_suma_bien(an, bn, array_auxiliar1);                     // Sumamos an + bn
+        //(an+bn)^2
+        karatsuba(array_auxiliar1, array_auxiliar1, array_auxiliar2);   // Multiplicamos al resultado de la suma de an+bn por el mismo.
+        //4*tn  
+        karatsuba(tn, cuatro, array_auxiliar3);                         // Multiplicamos tn por 4
+        // auxiliar2 entre auxiliar 3
+        karatsuba_dividir_array(array_auxiliar2, array_auxiliar3, array_auxiliar4);
+        // Copiamos el resultado al array de pi
+        copia_array(array_auxiliar4, pi);
+
+        printf("\n\n\tSe ha calculado PI\n");
+
+        // Retornamos un 0 como senial de que no hay ningun error.
+        return 0;
+    }
+    else{
+        // Si no se cumple la condicion, entonces es que necesitamos mas precision, lo llamamos de forma recursiva.
+        gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales, dos, cuatro);
+
+    }
 
 
 
@@ -244,18 +428,10 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
 // ==============================================================================================================================================
 
 
-// ==============================================================================================================================================
-int numero_a_cadena(double numero, int cadena[]){
-    if(numero < 0){ // Si es menor a cero entonces sabemos que el primer numero va a ser un 0
-        cadena[0]=0;
 
-    }
-}
 
 // ==============================================================================================================================================
-
-// ==============================================================================================================================================
-void inicializacion_de_variables(int an[], int bn[], int tn[], int pn[]){
+void inicializacion_de_variables(int an[], int bn[], int tn[], int pn[], int dos[]){
 
     int i;
     // Vamos a inicializar el valor de AN, que es 1
@@ -338,46 +514,39 @@ void inicializacion_de_variables(int an[], int bn[], int tn[], int pn[]){
         }
     }
 
-}
-
-// ==============================================================================================================================================
-
-
-// ==============================================================================================================================================
-void mostrar_vector_bien(int vector[]){
-    int i;
-    printf("\n");
-    for(i=0; i< TAM_VECTOR; i++){
-        if(i == 1){
-            printf(".");
+    // Vamos a inicializar el valor de dos, que como su nombre nos indica, es dos
+    for(i = 0; i < TAM_VECTOR; i++){
+        if(i == 0){
+            an[i] = 2;
         }
-        printf("%d", vector[i]);
-    }
-    printf("\n");
-}
-// ==============================================================================================================================================
-
-
-// ==============================================================================================================================================
-void mostrar_vector_inverso(int vector[]){
-    int i;
-    printf("\n");
-    for(i=0; i< TAM_VECTOR; i++){
-        if(i == (TAM_VECTOR - 1)){
-            printf(".");
+        else{
+            an[i] = 0;
         }
-        printf("%d", vector[i]);
     }
-    printf("\n");
+
+    // Vamos a inicializar el valor de cuatro, que como su nombre nos indica, es cuatro
+    for(i = 0; i < TAM_VECTOR; i++){
+        if(i == 0){
+            an[i] = 4;
+        }
+        else{
+            an[i] = 0;
+        }
+    }
+
 }
+
 // ==============================================================================================================================================
+
+
+
 
 // ==============================================================================================================================================
 // Funcion principal en la que ejecutamos el programa.
 int main (int argv, char *argc[]){
 
     int numero_decimales, numero_de_iteracciones, i;
-    int an[TAM_VECTOR], bn[TAM_VECTOR], tn[TAM_VECTOR], pn[TAM_VECTOR], xn[TAM_VECTOR], yn[TAM_VECTOR], pi[TAM_VECTOR], vector_auxiliar[TAM_VECTOR]; 
+    int an[TAM_VECTOR], bn[TAM_VECTOR], tn[TAM_VECTOR], pn[TAM_VECTOR], xn[TAM_VECTOR], yn[TAM_VECTOR], pi[TAM_VECTOR], vector_auxiliar[TAM_VECTOR], dos[TAM_VECTOR], cuatro[TAM_VECTOR]; 
 
     // Vemos si se ha introducido el parametro de forma correcta.
     if((argv < 2) || (argv > 2)){       // 2 porque 1 es la propia llamada al programa, 2 es el primer parametro, 3 seria el segundo, etc                           
@@ -402,7 +571,7 @@ int main (int argv, char *argc[]){
     limpieza_vector(vector_auxiliar);
     
     //  Inicializamos las variables tal y como se indica en el algoritmo.
-    inicializacion_de_variables(an, bn, tn, pn);
+    inicializacion_de_variables(an, bn, tn, pn, dos);
 
     // "Damos la vuelta" al vector
     invertir_array(an); 
@@ -423,11 +592,8 @@ int main (int argv, char *argc[]){
     
 
      // Llamamos a la funcionde GAUSS LEGENDRE 
-    gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales);
+    gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales, dos, cuatro);
 
-
-
-    
-    
-    
+    // Si se ejecuta hasta aqui es que ya se ha calculado pi. Podemos guardarlo en un archivo para comprobar la exactitud
+  
 }
