@@ -497,6 +497,77 @@ void mostrar_vector_inverso(int vector[]){
 // ==============================================================================================================================================
 
 
+// ==========================================================================================================================================
+int multiplicacion_por_numero(int cadena1_buena[], int numero){
+    int i, acarreo, suma=0, resultado[TAM_VECTOR];
+    for(i = 0; i < TAM_VECTOR; i++){
+        resultado[i] = numero * cadena1_buena[i];
+        resultado[i] = resultado[i] + acarreo;
+        if(resultado[i] > 9){
+            resultado[i] = resultado[i] / 10; 
+        }else{
+            resultado[i] = 0;
+        } 
+        suma=suma +  resultado[i];
+    }
+    return suma;
+}
+// ==========================================================================================================================================
+
+// ==========================================================================================================================================
+void inverso_de_a(int cadena1_buena[], int resultado[],int dos[]){
+    int i,j;
+    int cadena1[TAM_VECTOR], auxiliar1, auxiliar2, auxiliar3;
+  
+    // Copiamos los vectores en unos auxiliares para no modificarlos
+    for(i=0; i< TAM_VECTOR; i++){
+        cadena1[i] = cadena1_buena[i];
+        
+    }
+    invertir_array(cadena1);
+
+    // Realizamos los calculos
+    resultado[0] = cadena1[0];
+    for(i = 0; i< TAM_VECTOR-1; i++){
+        auxiliar1 = multiplicacion_por_numero(cadena1, cadena1[i]);   // Multiplicamos toda la cadena por el numero i de la cadena y lo guardamos en auxiliar1 
+         auxiliar2 = 2 - auxiliar1;   //funcion_resta_bien(dos, auxiliar1, auxiliar2);        // Restamos a 2 el dato que hay en auxiliar1 y lo guardamos en auxiliar2
+        // ya solo nos queda multiplicar xn por auxiliar2
+        auxiliar3 = cadena1[i] * auxiliar2;
+        // Ya tenemos el resultado en auxiliar3
+        resultado[i+i] = auxiliar3;
+    }
+
+    invertir_array(resultado);
+}
+// ==========================================================================================================================================
+
+// ==========================================================================================================================================
+void inverso_de_a_raiz(int cadena1_buena[], int resultado[],int dos[]){
+    int i,j;
+    int cadena1[TAM_VECTOR], auxiliar1, auxiliar2, auxiliar3;
+  
+    // Copiamos los vectores en unos auxiliares para no modificarlos
+    for(i=0; i< TAM_VECTOR; i++){
+        cadena1[i] = cadena1_buena[i];
+        
+    }
+    invertir_array(cadena1);
+
+    // Realizamos los calculos
+    resultado[0] = cadena1[0];
+    for(i = 0; i< TAM_VECTOR-1; i++){
+        auxiliar1 = multiplicacion_por_numero(cadena1, ((cadena1[i])^2));   // Multiplicamos toda la cadena por el numero i de la cadena y lo guardamos en auxiliar1 
+         auxiliar2 = 2 - auxiliar1;   //funcion_resta_bien(dos, auxiliar1, auxiliar2);        // Restamos a 2 el dato que hay en auxiliar1 y lo guardamos en auxiliar2
+        // ya solo nos queda multiplicar xn por auxiliar2
+        auxiliar3 = cadena1[i] * auxiliar2 / 2;
+        // Ya tenemos el resultado en auxiliar3
+        resultado[i+i] = auxiliar3;
+    }
+
+    invertir_array(resultado);
+}
+// ==========================================================================================================================================
+
 // ==============================================================================================================================================
 // Funcion de Gauss Legendre a la cual le pasamos el numero de decimales, y todos los posibles vectores usados
 // ; 
@@ -533,8 +604,10 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
     limpieza_vector(array_auxiliar2);                   // Limpiamos el array auxiliar que vamos a usar ahora.
     c = karatsuba(an, bn, n);                 // Multiplicamos an por bn y lo guardamos en array auxiliar 1
     copia_array(c, array_auxiliar1);
-    sqrt_arrays(array_auxiliar1, array_auxiliar2);      // calculamos la raiz cuadrada del calculo anterior y la guardamos en array auxiliar2
-    copia_array(array_auxiliar2, yn);
+    inverso_de_a_raiz(array_auxiliar1, array_auxiliar2, dos);// Calculamos la raiz
+    inverso_de_a(array_auxiliar2, array_auxiliar3, dos);     //Hacemos el inverso del calculo de la raiz para obtener el resultado
+    //sqrt_arrays(array_auxiliar1, array_auxiliar2);      // calculamos la raiz cuadrada del calculo anterior y la guardamos en array auxiliar2
+    copia_array(array_auxiliar3, yn);
 
     //tn = tn - pn*(pow((an-xn),2));
     limpieza_vector(array_auxiliar1);                   // Limpiamos el array auxiliar que vamos a usar ahora.
