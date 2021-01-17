@@ -1,0 +1,55 @@
+{inverso_de_a}
+FUNCION DE INVERSO_DE_A DEVUELVE VOID
+PARAMETROS
+    cadena1_buena, resultado: ARRAYS DE TAM_VECTOR DE ENTEROS
+VARIABLES
+    cadena1: ARRAY DE TAM_VECTOR ENTEROS 
+    i, j, a, b, c: ENTEROS
+
+PARA i=0 HASTA TAM_VECTOR
+    cadena1[i] <- cadena1_buena[i]
+FINPARA
+
+invertir_array(cadena1)
+
+resultado[0] <- cadena1[0]
+
+PARA i=0 HASTA TAM_VECTOR
+    a <- multiplicacion_por_numero(cadena1, cadena1[i])
+    b <- 2 - a
+    c <- cadena1[i] * b
+    resultado[i+1] <- c
+FINPARA
+
+invertir_array(resultado)
+
+
+
+--------------------------------------------------------------------------------------------------------
+
+
+
+{inverso_de_a_raiz}
+FUNCION DE INVERSO_DE_A DEVUELVE VOID
+PARAMETROS
+    cadena1_buena, resultado: ARRAYS DE TAM_VECTOR DE ENTEROS
+VARIABLES
+    cadena1: ARRAY DE TAM_VECTOR ENTEROS 
+    i, j, a, b, c: ENTEROS
+
+PARA i=0 HASTA TAM_VECTOR
+    cadena1[i] <- cadena1_buena[i]
+FINPARA
+
+invertir_array(cadena1)
+
+resultado[0] <- cadena1[0]
+
+PARA i=0 HASTA TAM_VECTOR
+    a <- multiplicacion_por_numero(cadena1, cadena1[i])
+    b <- 3 - a
+    c <- cadena1[i] * b
+    resultado[i+1] <- c
+FINPARA
+
+invertir_array(resultado)
