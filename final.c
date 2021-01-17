@@ -501,7 +501,7 @@ void mostrar_vector_inverso(int vector[]){
 // Funcion de Gauss Legendre a la cual le pasamos el numero de decimales, y todos los posibles vectores usados
 // ; 
 
-int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], int pi[], int numero_decimales, int dos[], int cuatro[], int cero_cinco[]){
+int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], int pi[], int numero_decimales, int dos[], int cuatro[], int cero_cinco[], int *numero_de_iteracciones){
     int *c;
     int temporal, array_auxiliar1[TAM_VECTOR], array_auxiliar2[TAM_VECTOR], array_auxiliar3[TAM_VECTOR], array_auxiliar4[TAM_VECTOR];   // Variables auxiliares.
     long double pi_normal; // Lo usaremos para almacenar PI en el caso de alcanzar la precisiond eseada.
@@ -521,6 +521,7 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
 
 // Pasos de GAUSS LEGENDRE
     // xn = ( (an + bn) / 2 );
+    (*numero_de_iteracciones) = (*numero_de_iteracciones) + 1;
     funcion_suma_bien(an,bn, array_auxiliar1);                  // // Sumamos an y bn y lo guardamos en el array auxiliar1
     // Lo siguiente en realidad es una division entre dos
     c = karatsuba(array_auxiliar1, cero_cinco, n);     // Dividimos el resultado anterior entre 2 (multiplicamos por 0.5) y lo guardamos en el puntero c
@@ -589,7 +590,7 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
     }
     else{
         // Si no se cumple la condicion, entonces es que necesitamos mas precision, lo llamamos de forma recursiva.
-        gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales, dos, cuatro, cero_cinco);
+        gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales, dos, cuatro, cero_cinco, numero_de_iteracciones);
 
     }
 
@@ -774,7 +775,7 @@ void inicializacion_de_variables(int an[], int bn[], int tn[], int pn[], int dos
 // Funcion principal en la que ejecutamos el programa.
 int main (int argv, char *argc[]){
 
-    int numero_decimales, numero_de_iteracciones, i;
+    int numero_decimales, numero_de_iteracciones = 0, i;
     int an[TAM_VECTOR], bn[TAM_VECTOR], tn[TAM_VECTOR], pn[TAM_VECTOR], xn[TAM_VECTOR], yn[TAM_VECTOR], pi[TAM_VECTOR], vector_auxiliar[TAM_VECTOR], dos[TAM_VECTOR], cuatro[TAM_VECTOR], cero_cinco[TAM_VECTOR]; 
 
     // Vemos si se ha introducido el parametro de forma correcta.
@@ -821,8 +822,8 @@ int main (int argv, char *argc[]){
     
 
      // Llamamos a la funcionde GAUSS LEGENDRE 
-    gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales, dos, cuatro, cero_cinco);
+    gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales, dos, cuatro, cero_cinco, &numero_de_iteracciones);
 
     // Si se ejecuta hasta aqui es que ya se ha calculado pi. Podemos guardarlo en un archivo para comprobar la exactitud
-  
+    printf("\n\n Se ha ejecutado con un total de %d iteracciones\n", numero_de_iteracciones);
 }
