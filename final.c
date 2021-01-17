@@ -534,7 +534,7 @@ void inverso_de_a(int cadena1_buena[], int resultado[],int dos[]){
         // ya solo nos queda multiplicar xn por auxiliar2
         auxiliar3 = cadena1[i] * auxiliar2;
         // Ya tenemos el resultado en auxiliar3
-        resultado[i+i] = auxiliar3;
+        resultado[i+1] = auxiliar3;
     }
 
     invertir_array(resultado);
@@ -557,11 +557,11 @@ void inverso_de_a_raiz(int cadena1_buena[], int resultado[],int dos[]){
     resultado[0] = cadena1[0];
     for(i = 0; i< TAM_VECTOR-1; i++){
         auxiliar1 = multiplicacion_por_numero(cadena1, ((cadena1[i])^2));   // Multiplicamos toda la cadena por el numero i de la cadena y lo guardamos en auxiliar1 
-         auxiliar2 = 2 - auxiliar1;   //funcion_resta_bien(dos, auxiliar1, auxiliar2);        // Restamos a 2 el dato que hay en auxiliar1 y lo guardamos en auxiliar2
+         auxiliar2 = 3 - auxiliar1;   //funcion_resta_bien(dos, auxiliar1, auxiliar2);        // Restamos a 2 el dato que hay en auxiliar1 y lo guardamos en auxiliar2
         // ya solo nos queda multiplicar xn por auxiliar2
         auxiliar3 = cadena1[i] * auxiliar2 / 2;
         // Ya tenemos el resultado en auxiliar3
-        resultado[i+i] = auxiliar3;
+        resultado[i+1] = auxiliar3;
     }
 
     invertir_array(resultado);
