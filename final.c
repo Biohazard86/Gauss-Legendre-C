@@ -271,11 +271,14 @@ int *producto(int *a, int *b, int n)
 		free(a1);free(a2);free(b1);free(b2);
 		free(c1);free(c2);free(c3);free(c4);
 	}
+
+
 	return c;
 }
 
 int *karatsuba(int *a,int *b, int n)
 {
+    //int n = TAM_VECTOR;
 	int *c=(int *)calloc(2*n,sizeof(int));
 	if(n==1)
 	{
@@ -496,9 +499,11 @@ void mostrar_vector_inverso(int vector[]){
 // ; 
 
 int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], int pi[], int numero_decimales, int dos[], int cuatro[]){
+    int *c;
     int temporal, array_auxiliar1[TAM_VECTOR], array_auxiliar2[TAM_VECTOR], array_auxiliar3[TAM_VECTOR], array_auxiliar4[TAM_VECTOR];   // Variables auxiliares.
     long double pi_normal; // Lo usaremos para almacenar PI en el caso de alcanzar la precisiond eseada.
 
+    int n = TAM_VECTOR;
     printf("\n Se procede a un iteraccion de Gauss-Legendre\n");
 
 
@@ -521,7 +526,8 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
     // yn = sqrt(an*bn);
     limpieza_vector(array_auxiliar1);                   // Limpiamos el array auxiliar que vamos a usar ahora.
     limpieza_vector(array_auxiliar2);                   // Limpiamos el array auxiliar que vamos a usar ahora.
-    karatsuba(an, bn, array_auxiliar1);                 // Multiplicamos an por bn y lo guardamos en array auxiliar 1
+    c = karatsuba(an, bn, n);                 // Multiplicamos an por bn y lo guardamos en array auxiliar 1
+    copia_array(c, array_auxiliar1);
     sqrt_arrays(array_auxiliar1, array_auxiliar2);      // calculamos la raiz cuadrada del calculo anterior y la guardamos en array auxiliar2
     copia_array(array_auxiliar2, yn);
 
@@ -529,8 +535,10 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
     limpieza_vector(array_auxiliar1);                   // Limpiamos el array auxiliar que vamos a usar ahora.
     limpieza_vector(array_auxiliar2);                   // Limpiamos el array auxiliar que vamos a usar ahora.
     funcion_resta_bien(an, xn, array_auxiliar1);        // Realizamos la resta y la guardamos en array auxiliar 1
-    karatsuba(array_auxiliar1, array_auxiliar1, array_auxiliar2); // Para elevar al cuadrado, multiplicamos el numero por el mismo, y lo guaramos el array auxiliar 2
-    karatsuba(pn, array_auxiliar2, array_auxiliar3);    // Multiplicamos pn * auxiliar 2 y lo guardamos en auxiliar 3
+    c = karatsuba(array_auxiliar1, array_auxiliar1, n); // Para elevar al cuadrado, multiplicamos el numero por el mismo, y lo guaramos el array auxiliar 2
+    copia_array(c, array_auxiliar2);
+    c = karatsuba(pn, array_auxiliar2, n);    // Multiplicamos pn * auxiliar 2 y lo guardamos en auxiliar 3
+    copia_array(c, array_auxiliar3);
     funcion_resta_bien(tn, array_auxiliar3, array_auxiliar4);   // Restamos a tn, el array auxiliar 3 y lo guardamos en auxiliar 4
     copia_array(array_auxiliar4, tn);
 
@@ -545,8 +553,9 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
     copia_array(yn, bn);        // Copiamos el array yn en el array bn
 
     //pn = 2*pn;
-    karatsuba(pn, dos, array_auxiliar1);
-    copia_array(array_auxiliar1, pn);
+    c = karatsuba(pn, dos, n);          // Hacemos la multiplicacion y 
+    copia_array(c, array_auxiliar1);    // Guardamos el resultado anterior en auxiliar 1
+    copia_array(array_auxiliar1, pn);   // Guardamos el resultado en pn
     limpieza_vector(array_auxiliar1);                   // Limpiamos el array auxiliar que vamos a usar ahora.
 
     // Ya tenemos todos los calculos realizados, ahora tenemos que comprobar si se ha alcanzado la precision deseada o si por el contrario, necesitamos una nueva iteraccion del algoritmo. 
@@ -559,9 +568,11 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
         //an+bn
         funcion_suma_bien(an, bn, array_auxiliar1);                     // Sumamos an + bn
         //(an+bn)^2
-        karatsuba(array_auxiliar1, array_auxiliar1, array_auxiliar2);   // Multiplicamos al resultado de la suma de an+bn por el mismo.
+        c = karatsuba(array_auxiliar1, array_auxiliar1, n);   // Multiplicamos al resultado de la suma de an+bn por el mismo.
+        copia_array(c, array_auxiliar2);                      // Guardamos el resultado en auxiliar 2
         //4*tn  
-        karatsuba(tn, cuatro, array_auxiliar3);                         // Multiplicamos tn por 4
+        c = karatsuba(tn, cuatro, n);                         // Multiplicamos tn por 4
+        copia_array(c, array_auxiliar3);                      // Guardamos el resultado en auxiliar 3
         // auxiliar2 entre auxiliar 3
         karatsuba_dividir_array(array_auxiliar2, array_auxiliar3, array_auxiliar4);
         // Copiamos el resultado al array de pi
