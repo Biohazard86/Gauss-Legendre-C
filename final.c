@@ -359,6 +359,9 @@ void karatsuba_dividir(int cadena1_buena[], int numero_dividir, int resultado[])
 
     invertir_array(cadena1);        // Colocamos los arrays en el orden normal para realizar las operaciones
    
+    if(numero_dividir == 2){
+
+    }
 
 
 
@@ -498,7 +501,7 @@ void mostrar_vector_inverso(int vector[]){
 // Funcion de Gauss Legendre a la cual le pasamos el numero de decimales, y todos los posibles vectores usados
 // ; 
 
-int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], int pi[], int numero_decimales, int dos[], int cuatro[]){
+int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], int pi[], int numero_decimales, int dos[], int cuatro[], int cero_cinco[]){
     int *c;
     int temporal, array_auxiliar1[TAM_VECTOR], array_auxiliar2[TAM_VECTOR], array_auxiliar3[TAM_VECTOR], array_auxiliar4[TAM_VECTOR];   // Variables auxiliares.
     long double pi_normal; // Lo usaremos para almacenar PI en el caso de alcanzar la precisiond eseada.
@@ -519,8 +522,9 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
 // Pasos de GAUSS LEGENDRE
     // xn = ( (an + bn) / 2 );
     funcion_suma_bien(an,bn, array_auxiliar1);                  // // Sumamos an y bn y lo guardamos en el array auxiliar1
-    karatsuba_dividir(array_auxiliar1, 2, array_auxiliar2);     // Dividimos el resultado anterior entre 2 y lo guardamos en el array auxiliar2
-    copia_array(array_auxiliar2, xn);                           // Copiamos el valor del array auxiliar2 en el array xn.
+    // Lo siguiente en realidad es una division entre dos
+    c = karatsuba(array_auxiliar1, cero_cinco, n);     // Dividimos el resultado anterior entre 2 (multiplicamos por 0.5) y lo guardamos en el puntero c
+    copia_array(c, xn);                           // Copiamos el valor de c en el array xn.
     // Podiamos haber pasado a la funcion karatsuba_dividir el valor de xn como "resultado". Seria igual de correcto
 
     // yn = sqrt(an*bn);
@@ -585,7 +589,7 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
     }
     else{
         // Si no se cumple la condicion, entonces es que necesitamos mas precision, lo llamamos de forma recursiva.
-        gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales, dos, cuatro);
+        gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales, dos, cuatro, cero_cinco);
 
     }
 
@@ -641,7 +645,7 @@ int gauss_legendre (int an[], int bn[], int tn[], int pn[], int xn[], int yn[], 
 
 
 // ==============================================================================================================================================
-void inicializacion_de_variables(int an[], int bn[], int tn[], int pn[], int dos[]){
+void inicializacion_de_variables(int an[], int bn[], int tn[], int pn[], int dos[], int cuatro[], int cero_cinco[]){
 
     int i;
     // Vamos a inicializar el valor de AN, que es 1
@@ -727,21 +731,36 @@ void inicializacion_de_variables(int an[], int bn[], int tn[], int pn[], int dos
     // Vamos a inicializar el valor de dos, que como su nombre nos indica, es dos
     for(i = 0; i < TAM_VECTOR; i++){
         if(i == 0){
-            an[i] = 2;
+            dos[i] = 2;
         }
         else{
-            an[i] = 0;
+            dos[i] = 0;
         }
     }
 
     // Vamos a inicializar el valor de cuatro, que como su nombre nos indica, es cuatro
     for(i = 0; i < TAM_VECTOR; i++){
         if(i == 0){
-            an[i] = 4;
+            cuatro[i] = 4;
         }
         else{
-            an[i] = 0;
+            cuatro[i] = 0;
         }
+    }
+
+    // Vamos a inicializar el valor de cero coma 5, que como su nombre nos indica, es 0.5
+    for(i = 0; i < TAM_VECTOR; i++){
+        if(i == 0){
+            cero_cinco[i] = 0;
+        }
+        if(i == 1){
+            cero_cinco[i] = 5;
+        }
+        if(i > 1){
+            tn[i] = 0;
+        }
+        
+        
     }
 
 }
@@ -756,7 +775,7 @@ void inicializacion_de_variables(int an[], int bn[], int tn[], int pn[], int dos
 int main (int argv, char *argc[]){
 
     int numero_decimales, numero_de_iteracciones, i;
-    int an[TAM_VECTOR], bn[TAM_VECTOR], tn[TAM_VECTOR], pn[TAM_VECTOR], xn[TAM_VECTOR], yn[TAM_VECTOR], pi[TAM_VECTOR], vector_auxiliar[TAM_VECTOR], dos[TAM_VECTOR], cuatro[TAM_VECTOR]; 
+    int an[TAM_VECTOR], bn[TAM_VECTOR], tn[TAM_VECTOR], pn[TAM_VECTOR], xn[TAM_VECTOR], yn[TAM_VECTOR], pi[TAM_VECTOR], vector_auxiliar[TAM_VECTOR], dos[TAM_VECTOR], cuatro[TAM_VECTOR], cero_cinco[TAM_VECTOR]; 
 
     // Vemos si se ha introducido el parametro de forma correcta.
     if((argv < 2) || (argv > 2)){       // 2 porque 1 es la propia llamada al programa, 2 es el primer parametro, 3 seria el segundo, etc                           
@@ -781,7 +800,7 @@ int main (int argv, char *argc[]){
     limpieza_vector(vector_auxiliar);
     
     //  Inicializamos las variables tal y como se indica en el algoritmo.
-    inicializacion_de_variables(an, bn, tn, pn, dos);
+    inicializacion_de_variables(an, bn, tn, pn, dos, cuatro, cero_cinco);
 
     // "Damos la vuelta" al vector
     invertir_array(an); 
@@ -802,7 +821,7 @@ int main (int argv, char *argc[]){
     
 
      // Llamamos a la funcionde GAUSS LEGENDRE 
-    gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales, dos, cuatro);
+    gauss_legendre(an, bn, tn, pn, xn, yn, pi, numero_decimales, dos, cuatro, cero_cinco);
 
     // Si se ejecuta hasta aqui es que ya se ha calculado pi. Podemos guardarlo en un archivo para comprobar la exactitud
   
