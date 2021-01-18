@@ -59,5 +59,26 @@ FIN FUNCION DE INVERSO_DE_A_RAIZ
 
 ----------------------------------------------------------------------------------------------------------------------
 
+{multiplicacion_por_numero}
+FUNCION DE multiplicacion_por_numero VOID
+PARAMETROS
+    cadena1_buena, numero: ARRAYS DE N DE ENTEROS
+VARIABLES
+    resultado: ARRAY DE N ENTEROS 
+    i, acarreo, suma: ENTEROS
 
+PARA i=0 HASTA TAM_VECTOR
+    resultado[i] <- numero * cadena1_buena[i]
+    resultado[i] <- resultado[i] + acarreo
+    
+    SI(resultado > 9)
+        resultado[i] = resultado[i] DIV 10
+    SINO    
+        resultado[i] = 0
+    FINSI
+
+FINPARA
+RETORNAR SUMA
+
+FIN FUNCION DE multiplicacion_por_numero
 
