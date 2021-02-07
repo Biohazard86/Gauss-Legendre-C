@@ -859,7 +859,11 @@ int main (int argv, char *argc[]){
     }
 
     // En el caso de que no haya error, pasamos el primer parametro a int y lo guardamos en la variable de numero de iteracciones.
-    numero_decimales = atoi(argc[1]);;
+    numero_decimales = atoi(argc[1]);
+    if(numero_decimales < 1){
+         printf("\n\n\tNumero demasiado bajo. Saliendo del programa\n\n");      // Mostramos mensaje de error
+	 return 1;
+    }
     printf("\n Se van a calcular la iteracciones para %d decimales de PI\n\n", numero_decimales);
 
     // limpiamos los vectores, ya que puede haber datos resuduales dentro de ellos, nos aseguramos de que solom haya 0s
